@@ -18,6 +18,34 @@ Then your applications will be available at: `http://api.localhost:9000/` and `h
 
 Simples.
 
+## Use with Docker-Compose
+
+Pincushion is particularly useful when developing an application with docker-compose.
+
+Imagine you have the following setup:
+
+    app1:
+        image: myorg/app1
+        expose:
+            - 80
+
+    app2:
+        image: myorg/app2
+        expose:
+            - 80
+
+You can then add pincushion in to expose your services to localhost.
+
+    pin:
+        image: stilvoid/pincushion
+        ports:
+            - 9000:80
+        links:
+            - app1
+            - app2
+
+And visit `app1.localhost:9000` in your browser :)
+
 ## Limitations
 
 Pincushion assumes each linked container is serving HTTP and only has one port bound.
